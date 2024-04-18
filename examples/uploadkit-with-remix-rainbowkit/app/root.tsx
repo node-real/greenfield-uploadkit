@@ -27,6 +27,7 @@ import uploadKitStyleUrl from '@node-real/greenfield-uploadkit/styles.css';
 import rainbowStylesUrl from '@rainbow-me/rainbowkit/styles.css';
 import { client } from './client';
 import { chainList } from './chains';
+import { VisibilityType } from '@bnb-chain/greenfield-js-sdk';
 
 type Env = { PUBLIC_ENABLE_TESTNETS?: string };
 
@@ -58,7 +59,8 @@ export const loader: LoaderFunction = () => {
 
 const uploadOptions: UploadKitOptions = {
   client: client,
-  visibility: 'VISIBILITY_TYPE_PUBLIC_READ',
+  visibility: VisibilityType.VISIBILITY_TYPE_PUBLIC_READ,
+  delegateUpload: true,
 };
 export default function App() {
   const { ENV } = useLoaderData<LoaderData>();

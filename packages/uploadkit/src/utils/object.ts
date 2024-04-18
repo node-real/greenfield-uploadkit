@@ -1,11 +1,4 @@
-import { VisibilityType } from '@bnb-chain/greenfield-cosmos-types/greenfield/storage/common';
 import { Long } from '@bnb-chain/greenfield-js-sdk';
-
-export type TKey = keyof typeof VisibilityType;
-
-export type TReverseVisibilityType = {
-  [K in number]: TKey;
-};
 
 export type DragItemProps = {
   items: DataTransferItemList;
@@ -22,21 +15,6 @@ export type TransferItemTree = {
 export type TransferItemFlat = {
   [key: string]: File;
 };
-
-const StringIsNumber = (value: string) => !isNaN(Number(value));
-
-export const convertVisibility = () => {
-  const reverseVisibilityType: any = {} as TReverseVisibilityType;
-  Object.keys(VisibilityType)
-    .filter(StringIsNumber)
-    .forEach((item: any) => {
-      reverseVisibilityType[item] = VisibilityType[item];
-    });
-
-  return reverseVisibilityType;
-};
-
-export const reverseVisibilityType = convertVisibility();
 
 export const isUTF8 = (str: string): boolean => {
   try {

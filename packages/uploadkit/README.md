@@ -25,8 +25,13 @@ The following examples are provided in the [examples](../../examples/) folder of
 ## Installation
 
 ```bash
-npm i wagmi viem @node-real/greenfield-uploadkit @bnb-chain/greenfield-js-sdk @bnb-chain/greenfield-cosmos-types @bnb-chain/reed-solomon
+npm i wagmi@1 viem@1 @node-real/greenfield-uploadkit @bnb-chain/greenfield-js-sdk@2.0.0-alpha.6 @bnb-chain/greenfield-cosmos-types@0.4.0-alpha.31 @bnb-chain/reed-solomon
 ```
+- wagmi >= 1.0.0
+- viem >= 1.0.0
+- @bnb-chain/greenfield-js-sdk = 2.0.0-alpha.6
+- @bnb-chain/greenfield-cosmos-types = 0.4.0-alpha.31
+- @bnb-chain/reed-solomon >= 1.1.3
 
 ## Usage
 Before using Greenfield UploadKit, you need to switch your network to the BNB Greenfield Chain. We recommend using [@node-real/walletkit](https://github.com/node-real/walletkit) to connect your wallet and manage the network. This integration will ensure a seamless experience when working with Greenfield UploadKit.

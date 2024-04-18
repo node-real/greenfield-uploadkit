@@ -13,6 +13,7 @@ import { CRYPTOCURRENCY_DISPLAY_PRECISION } from '@/constants';
 import BigNumber from 'bignumber.js';
 import { WaitObject } from '@/components/UploadProvider/types';
 import { getStoreNetflowRate } from '@/utils/fee';
+import { useUploadKitContext } from '..';
 
 /**
  * useTotalFee returns the total fee of the upload queue.
@@ -22,11 +23,17 @@ export function useTotalFee() {
     state: { waitQueue },
   } = useUpload();
   const [totalFee, setTotalFee] = useState('0');
+  const {
+    options: { delegateUpload },
+  } = useUploadKitContext();
   const { gasHub, storeParams } = useFee();
   const { gasObjects = {} } = gasHub || {};
   const { address } = useAccount();
   const { settlementFee } = useSettlementFee(address as string);
   const createTmpAccountGasFee = useMemo(() => {
+    if (delegateUpload) {
+      return '0';
+    }
     const grantAllowTxFee = BN(gasObjects[MsgGrantAllowanceTypeUrl]?.gasFee || 0).plus(
       BN(gasObjects[MsgGrantAllowanceTypeUrl]?.perItemFee || 0).times(1),
     );
@@ -60,10 +67,12 @@ export function useTotalFee() {
     .dividedBy(10 ** 18)
     .dp(CRYPTOCURRENCY_DISPLAY_PRECISION)
     .toString();
-  const objectsGasFee = BN(num)
-    .times(gasFee || 0)
-    .dp(CRYPTOCURRENCY_DISPLAY_PRECISION)
-    .toString();
+  const objectsGasFee = delegateUpload
+    ? '0'
+    : BN(num)
+        .times(gasFee || 0)
+        .dp(CRYPTOCURRENCY_DISPLAY_PRECISION)
+        .toString();
 
   useEffect(() => {
     const totalFee = BN(objectsGasFee)

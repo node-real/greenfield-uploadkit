@@ -1,22 +1,16 @@
 import { BroadcastResponse, resolve } from '@/facade/common';
 import { ErrorResponse, broadcastFault, createTxFault, simulateFault } from '@/facade/error';
-import { AuthType } from '@/facade/tx';
 import { signTypedDataCallback } from '@/facade/wallet';
-import {
-  Client,
-  CreateBucketApprovalRequest,
-  ISimulateGasFee,
-  TxResponse,
-} from '@bnb-chain/greenfield-js-sdk';
+import { MsgCreateBucket } from '@bnb-chain/greenfield-cosmos-types/greenfield/storage/tx';
+import { Client, ISimulateGasFee, TxResponse } from '@bnb-chain/greenfield-js-sdk';
 import { Connector } from 'wagmi';
 
 export const simulateCreateBucket = async (
-  params: CreateBucketApprovalRequest,
-  authType: AuthType,
+  params: MsgCreateBucket,
   client: Client,
 ): Promise<[ISimulateGasFee, null, TxResponse] | ErrorResponse> => {
   const [createBucketTx, error1] = await client.bucket
-    .createBucket(params, authType)
+    .createBucket(params)
     .then(resolve, createTxFault);
 
   if (!createBucketTx) return [null, error1];
@@ -33,16 +27,11 @@ export const simulateCreateBucket = async (
 };
 
 export const createBucket = async (
-  params: CreateBucketApprovalRequest,
-  authType: AuthType,
+  params: MsgCreateBucket,
   connector: Connector,
   client: Client,
 ): BroadcastResponse => {
-  const [simulateInfo, error, createBucketTx] = await simulateCreateBucket(
-    params,
-    authType,
-    client,
-  );
+  const [simulateInfo, error, createBucketTx] = await simulateCreateBucket(params, client);
   if (!simulateInfo) return [null, error];
 
   const payload = {

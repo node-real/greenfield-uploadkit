@@ -70,7 +70,7 @@ export const reducer: Reducer = (state, action) => {
     }
     // Set uploadQueue based on waitQueue items
     case 'SET_UPLOAD_QUEUE': {
-      const { bucketName, spAddress, visibility } = action.payload;
+      const { bucketName, spAddress, visibility, delegateUpload } = action.payload;
       const waitQueue = state.waitQueue;
       const uploadTasks = waitQueue.map((task) => {
         const uploadTask: UploadObject = {
@@ -85,6 +85,7 @@ export const reducer: Reducer = (state, action) => {
           checksum: [],
           visibility: visibility,
           createHash: '',
+          delegateUpload,
         };
         return uploadTask;
       });

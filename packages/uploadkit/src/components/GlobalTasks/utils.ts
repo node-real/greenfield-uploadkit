@@ -5,31 +5,40 @@ import {
   UploadObject,
   UploadStatus,
 } from '@/components/UploadProvider/types';
-import { TMakePutObjectHeaders, getCreateObjectTx, makePutObjectHeaders } from '@/facade/object';
+import { getCreateObjectTx, getPutObjectRequestConfig } from '@/facade/object';
 import { broadcastTmpTx } from '@/facade/tx';
 import { parseErrorXml } from '@/utils/common';
-import { AuthType, Client, CreateObjectApprovalRequest } from '@bnb-chain/greenfield-js-sdk';
+import { MsgCreateObject } from '@bnb-chain/greenfield-cosmos-types/greenfield/storage/tx';
+import { Client, Long, RedundancyType } from '@bnb-chain/greenfield-js-sdk';
+import { bytesFromBase64 } from '@bnb-chain/greenfield-cosmos-types/helpers';
 import { ReedSolomon } from '@bnb-chain/reed-solomon';
 import { Dispatch } from 'react';
 
+const MAX_PARALLEL_UPLOADS = 10;
 export const getHashTask = (uploadQueue: UploadObject[]) => {
-  const hashQueue = uploadQueue.filter((task) => task.status === 'HASH');
-  const wQueue = uploadQueue.filter((task) => task.status === 'WAIT');
+  const hashQueue = uploadQueue.filter((task) => task.status === 'HASH' && !task.delegateUpload);
+  const wQueue = uploadQueue.filter((task) => task.status === 'WAIT' && !task.delegateUpload);
   return hashQueue.length ? null : wQueue[0] || null;
 };
 
 export const getSignTask = (uploadQueue: UploadObject[]) => {
-  const signQueue = uploadQueue.filter((task) => task.status === 'SIGN');
-  const hashedQueue = uploadQueue.filter((task) => task.status === 'HASHED');
-  const uploadingQueue = uploadQueue.filter((task) => task.status === 'UPLOAD');
+  const signQueue = uploadQueue.filter((task) => task.status === 'SIGN' && !task.delegateUpload);
+  const hashedQueue = uploadQueue.filter(
+    (task) => task.status === 'HASHED' && !task.delegateUpload,
+  );
+  const uploadingQueue = uploadQueue.filter(
+    (task) => task.status === 'UPLOAD' && !task.delegateUpload,
+  );
   return uploadingQueue.length || !!signQueue.length ? null : hashedQueue[0] || null;
 };
 
 export function getUploadTask(uploadQueue: UploadObject[]) {
   const uploadingQueue = uploadQueue.filter((t) => t.status === 'UPLOAD');
-  const signedQueue = uploadQueue.filter((t) => t.status === 'SIGNED');
-  const uploadingOffset = 1 - uploadingQueue.length;
-  return uploadingOffset > 0 ? signedQueue.slice(0, uploadingOffset).map((p) => p.id) : [];
+  const waitUploadQueue = uploadQueue.filter(
+    (t) => t.status === 'SIGNED' || (t.status === 'WAIT' && t.delegateUpload),
+  );
+  const uploadingOffset = MAX_PARALLEL_UPLOADS - uploadingQueue.length;
+  return uploadingOffset > 0 ? waitUploadQueue.slice(0, uploadingOffset).map((p) => p.id) : [];
 }
 
 export const processHashTask = async (
@@ -118,25 +127,18 @@ export const processSignTask = async ({
   tmpAccount: TTmpAccount;
   address: string;
 }) => {
-  const createObjectPayload: CreateObjectApprovalRequest = {
+  const createObjectPayload: MsgCreateObject = {
     bucketName: task.bucketName,
     objectName: task.waitObject.name,
     creator: tmpAccount.address,
     visibility: task.visibility,
-    fileType: task.waitObject.type || 'application/octet-stream',
-    contentLength: task.waitObject.size,
-    expectCheckSums: task.checksum,
-    duration: 5000,
+    contentType: task.waitObject.type || 'application/octet-stream',
+    payloadSize: Long.fromInt(task.waitObject.size),
+    expectChecksums: task.checksum.map((x) => bytesFromBase64(x)),
+    redundancyType: RedundancyType.REDUNDANCY_EC_TYPE,
   };
 
-  const [createObjectTx, createError] = await getCreateObjectTx(
-    createObjectPayload,
-    {
-      type: 'ECDSA',
-      privateKey: tmpAccount.privateKey,
-    },
-    client,
-  );
+  const [createObjectTx, createError] = await getCreateObjectTx(createObjectPayload, client);
 
   if (createObjectTx === null || createError) {
     return dispatch({
@@ -191,25 +193,19 @@ export const runUploadTask = async ({
       status: 'UPLOAD',
     },
   });
-  const payload: TMakePutObjectHeaders = {
-    bucketName: task.bucketName,
-    objectName: task.waitObject.name,
-    body: task.waitObject.file,
-    endpoint: selectedSp.endpoint,
-    txnHash: task.createHash,
-  };
-  const authType = {
-    type: 'EDDSA',
-    seed: seedString,
-    domain: window.location.origin,
-    address,
-  } as AuthType;
 
   try {
-    const [uploadOptions, poError] = await makePutObjectHeaders(payload, authType, client);
+    const uploadOptions = await getPutObjectRequestConfig({
+      task,
+      loginAccount: address,
+      seedString,
+      endpoint: selectedSp.endpoint,
+      file: task.waitObject.file,
+      client,
+    });
 
-    if (!uploadOptions || poError) {
-      throw poError;
+    if (!uploadOptions) {
+      throw Error('Error during upload task preparation.');
     }
 
     const { url, headers } = uploadOptions;
@@ -240,6 +236,8 @@ export const runUploadTask = async ({
           },
         });
       } else {
+        const parsedResponse = await parseErrorXml(xhr.response);
+        console.log('xhr.response', xhr.response, parsedResponse);
         const { message } = await parseErrorXml(xhr.response);
         const authExpired = [
           'bad signature',
@@ -270,18 +268,18 @@ export const runUploadTask = async ({
       });
     };
 
-    // Set custom headers
-    Object.entries({
+    const needHeaders: { [key: string]: string | null } = {
       Authorization: headers.get('Authorization'),
       'content-type': headers.get('content-type'),
       'x-gnfd-app-domain': headers.get('x-gnfd-app-domain'),
       'x-gnfd-content-sha256': headers.get('x-gnfd-content-sha256'),
       'x-gnfd-date': headers.get('x-gnfd-date'),
       'x-gnfd-expiry-timestamp': headers.get('x-gnfd-expiry-timestamp'),
-      'x-gnfd-txn-hash': headers.get('x-gnfd-txn-hash'),
       'x-gnfd-user-address': headers.get('x-gnfd-user-address'),
-    }).forEach(([header, value]) => {
-      xhr.setRequestHeader(header, value as string);
+      'X-Gnfd-App-Reg-Public-Key': headers.get('X-Gnfd-App-Reg-Public-Key'),
+    };
+    Object.entries(needHeaders).forEach(([header, value]) => {
+      value !== null && xhr.setRequestHeader(header, value);
     });
 
     // Send the file
