@@ -18,7 +18,7 @@ import { client } from './client';
 import ProgressBarExample from './components/ProgressExample';
 import { Icons } from './components/Icons';
 import { Link } from '@/base/components/Link';
-import { ReedSolomon } from '@bnb-chain/reed-solomon';
+import { VisibilityType } from '@bnb-chain/greenfield-js-sdk';
 
 const config = createConfig(
   getDefaultConfig({
@@ -41,7 +41,8 @@ const options: WalletKitOptions = {
 const uploadOptions: UploadKitOptions = {
   client: client,
   bucketName: 'test-upload-kit',
-  // seedString: '0xa25fa0de5d5e82b84826a0bce8c84a1bf1b0c8786c586ec696dc52300a9ffe007bb7e10d9901a32b67ed06fdef1d296f6d6fa00fdd33deaeadbd2363fe87708d1c',
+  delegateUpload: true,
+  // seedString: '',
   // checksumFn: async (data: Uint8Array) => {
   //   const rs = new ReedSolomon();
   //   return rs.encode(data);
@@ -50,7 +51,7 @@ const uploadOptions: UploadKitOptions = {
     operatorAddress: '0x89A1CC91B642DECbC4789474694C606E0E0c420b',
     endpoint: 'https://gnfd-testnet-sp1.bnbchain.org',
   },
-  visibility: 'VISIBILITY_TYPE_PUBLIC_READ',
+  visibility: VisibilityType.VISIBILITY_TYPE_PUBLIC_READ,
   // onError: console.log,
 };
 

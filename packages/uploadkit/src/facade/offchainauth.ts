@@ -1,9 +1,13 @@
-import { Client, IReturnOffChainAuthKeyPairAndUpload } from '@bnb-chain/greenfield-js-sdk';
+import {
+  Client,
+  IGenOffChainAuthKeyPairAndUpload,
+  IReturnOffChainAuthKeyPairAndUpload,
+} from '@bnb-chain/greenfield-js-sdk';
 import { getSps } from './sp';
 import { ErrorResponse, UNKNOWN_ERROR } from './error';
 
-export const OFF_CHAIN_AUTH_EXPIRATION_MS = 5 * 24 * 60 * 60 * 1000;
-export const getOffChainAuthKeys = async ({
+export const EXPIRATION_MS = 5 * 24 * 60 * 60 * 1000;
+export const onOffChainAuth = async ({
   address,
   provider,
   client,
@@ -23,14 +27,16 @@ export const getOffChainAuthKeys = async ({
     endpoint: sp.endpoint,
     name: sp.description?.moniker,
   }));
+  const configParam: IGenOffChainAuthKeyPairAndUpload = {
+    sps: sps,
+    chainId: chainId,
+    expirationMs: EXPIRATION_MS,
+    domain: window.location.origin,
+    address,
+  };
+
   const offchainAuthRes = await client.offchainauth.genOffChainAuthKeyPairAndUpload(
-    {
-      sps: sps,
-      chainId: chainId,
-      expirationMs: OFF_CHAIN_AUTH_EXPIRATION_MS,
-      domain: window.location.origin,
-      address,
-    },
+    configParam,
     provider,
   );
 

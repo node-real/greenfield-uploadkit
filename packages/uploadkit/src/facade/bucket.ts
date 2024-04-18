@@ -1,23 +1,17 @@
 import { BroadcastResponse, resolve } from './common';
 import { ErrorResponse, broadcastFault, createTxFault, simulateFault } from './error';
-import {
-  Client,
-  CreateBucketApprovalRequest,
-  ISimulateGasFee,
-  TxResponse,
-} from '@bnb-chain/greenfield-js-sdk';
+import { Client, ISimulateGasFee, TxResponse } from '@bnb-chain/greenfield-js-sdk';
 import { Connector } from 'wagmi';
 import { signTypedDataCallback } from './wallet';
-import { AuthType } from '@/facade/tx';
 import { commonFault } from './error';
+import { MsgCreateBucket } from '@bnb-chain/greenfield-cosmos-types/greenfield/storage/tx';
 
 export const simulateCreateBucket = async (
-  params: CreateBucketApprovalRequest,
-  authType: AuthType,
+  params: MsgCreateBucket,
   client: Client,
 ): Promise<[ISimulateGasFee, null, TxResponse] | ErrorResponse> => {
   const [createBucketTx, error1] = await client.bucket
-    .createBucket(params, authType)
+    .createBucket(params)
     .then(resolve, createTxFault);
 
   if (!createBucketTx) return [null, error1];
@@ -34,16 +28,11 @@ export const simulateCreateBucket = async (
 };
 
 export const createBucket = async (
-  params: CreateBucketApprovalRequest,
-  authType: AuthType,
+  params: MsgCreateBucket,
   connector: Connector,
   client: Client,
 ): BroadcastResponse => {
-  const [simulateInfo, error, createBucketTx] = await simulateCreateBucket(
-    params,
-    authType,
-    client,
-  );
+  const [simulateInfo, error, createBucketTx] = await simulateCreateBucket(params, client);
   if (!simulateInfo) return [null, error];
 
   const payload = {
@@ -59,11 +48,10 @@ export const createBucket = async (
 };
 
 export const getCreateBucketTx = async (
-  params: CreateBucketApprovalRequest,
-  authType: AuthType,
+  msgCreateBucket: MsgCreateBucket,
   client: Client,
 ): Promise<[TxResponse, null] | ErrorResponse> => {
-  return client.bucket.createBucket(params, authType).then(resolve, createTxFault);
+  return client.bucket.createBucket(msgCreateBucket).then(resolve, createTxFault);
 };
 
 export const getBucketMeta = (

@@ -1,10 +1,10 @@
-import { bsc, mainnet } from 'wagmi/chains';
+import { bsc, bscTestnet } from 'wagmi/chains';
 
 export const chains = [
   {
     id: 5600,
-    name: 'BNB Greenfield Testnet',
-    network: 'BNB Greenfield Testnet',
+    name: 'BNB Greenfield Chain Testnet',
+    network: 'BNB Greenfield Chain Testnet',
     nativeCurrency: {
       name: 'tBNB',
       symbol: 'tBNB',
@@ -20,59 +20,43 @@ export const chains = [
     },
     blockExplorers: {
       etherscan: {
-        name: `BNB Greenfield Testnet Scan`,
+        name: `BNB Greenfield Chain Testnet Scan`,
         url: 'https://greenfield-chain.bnbchain.org',
       },
       default: {
-        name: `BNB Greenfield Testnet Scan`,
+        name: `BNB Greenfield Chain Testnet Scan`,
         url: 'https://greenfield-chain.bnbchain.org',
       },
     },
   },
   {
-    id: 204,
-    name: 'opBNB Mainnet',
-    network: 'opBNB Mainnet',
+    id: 1017,
+    name: 'BNB Greenfield Chain',
+    network: 'BNB Greenfield Chain',
     nativeCurrency: {
-      name: 'tcBNB',
-      symbol: 'tcBNB',
+      name: 'BNB',
+      symbol: 'BNB',
       decimals: 18,
     },
     rpcUrls: {
       default: {
-        http: ['https://opbnb-mainnet-rpc.bnbchain.org'],
+        http: ['https://greenfield-chain.bnbchain.org'],
       },
       public: {
-        http: ['https://opbnb-mainnet-rpc.bnbchain.org'],
+        http: ['https://greenfield-chain.bnbchain.org'],
       },
     },
     blockExplorers: {
-      etherscan: { name: 'opBNBScan', url: `https://mainnet.opbnbscan.com` },
-      default: { name: 'opBNBScan', url: `https://mainnet.opbnbscan.com` },
-    },
-  },
-  {
-    id: 97,
-    name: 'BSC Testnet',
-    network: 'BSC Testnet',
-    nativeCurrency: {
-      name: 'tBNB',
-      symbol: 'tBNB',
-      decimals: 18,
-    },
-    rpcUrls: {
+      etherscan: {
+        name: `BNB Greenfield Mainnet Scan`,
+        url: 'https://greenfieldscan.com',
+      },
       default: {
-        http: [`https://data-seed-prebsc-1-s1.binance.org:8545`],
+        name: `BNB Greenfield Mainnet Scan`,
+        url: 'https://greenfieldscan.com',
       },
-      public: {
-        http: [`https://data-seed-prebsc-1-s1.binance.org:8545`],
-      },
-    },
-    blockExplorers: {
-      etherscan: { name: 'BSC Testnet Scan', url: `https://testnet.bscscan.com` },
-      default: { name: 'BSC Testnet Scan', url: `https://testnet.bscscan.com` },
     },
   },
+  bscTestnet,
   bsc,
-  mainnet,
 ];

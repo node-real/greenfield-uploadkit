@@ -1,5 +1,18 @@
 # @node-real/greenfield-uploadkit
 
+## 0.0.7
+
+### Patch Changes
+
+- a2bc4c1: chore: unify the default visibility
+
+## 0.0.6
+
+### Patch Changes
+
+- 564f074: fix: greenfield-uploadkit auto upgrade version error
+- 564f074: chore: fix dependencies' versions in the example project, migrate @totejs/walletkit to @node-real/walletkit.
+
 ## 0.0.6-alpha.2
 
 ### Patch Changes

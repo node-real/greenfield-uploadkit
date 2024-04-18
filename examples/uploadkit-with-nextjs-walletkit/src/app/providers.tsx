@@ -13,6 +13,7 @@ import { client } from './client';
 
 import '@node-real/greenfield-uploadkit/styles.css';
 import '@node-real/walletkit/styles.css';
+import { VisibilityType } from '@bnb-chain/greenfield-js-sdk';
 
 const config = createConfig(
   getDefaultConfig({
@@ -33,7 +34,8 @@ const options: WalletKitOptions = {
 
 const uploadOptions: UploadKitOptions = {
   client: client,
-  visibility: 'VISIBILITY_TYPE_PUBLIC_READ',
+  visibility: VisibilityType.VISIBILITY_TYPE_PUBLIC_READ,
+  delegateUpload: true,
 };
 
 export default function Providers({ children }: { children: React.ReactNode }) {

@@ -12,6 +12,7 @@ export const useUploadDisable = () => {
   const {
     state: { loading, waitQueue },
   } = useUpload();
+
   useEffect(() => {
     const isGnfd = isGnfdChain(chain?.id);
     const buttonDisabled =

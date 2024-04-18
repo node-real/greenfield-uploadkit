@@ -45,11 +45,11 @@ importers:
   docs:
     dependencies:
       '@bnb-chain/greenfield-cosmos-types':
-        specifier: 0.4.0
-        version: 0.4.0
+        specifier: 0.4.0-alpha.31
+        version: 0.4.0-alpha.31
       '@bnb-chain/greenfield-js-sdk':
-        specifier: 1.2.0
-        version: 1.2.0
+        specifier: 2.0.0-alpha.6
+        version: 2.0.0-alpha.6
       '@bnb-chain/reed-solomon':
         specifier: ^1.1.3
         version: 1.1.3
@@ -148,11 +148,11 @@ importers:
   examples/uploadkit-with-nextjs-rainbowkit:
     dependencies:
       '@bnb-chain/greenfield-cosmos-types':
-        specifier: 0.4.0
-        version: 0.4.0
+        specifier: 0.4.0-alpha.31
+        version: 0.4.0-alpha.31
       '@bnb-chain/greenfield-js-sdk':
-        specifier: 1.2.0
-        version: 1.2.0
+        specifier: 2.0.0-alpha.6
+        version: 2.0.0-alpha.6
       '@bnb-chain/reed-solomon':
         specifier: 1.1.3
         version: 1.1.3
@@ -206,11 +206,11 @@ importers:
   examples/uploadkit-with-nextjs-walletkit:
     dependencies:
       '@bnb-chain/greenfield-cosmos-types':
-        specifier: 0.4.0
-        version: 0.4.0
+        specifier: 0.4.0-alpha.31
+        version: 0.4.0-alpha.31
       '@bnb-chain/greenfield-js-sdk':
-        specifier: 1.2.0
-        version: 1.2.0
+        specifier: 2.0.0-alpha.6
+        version: 2.0.0-alpha.6
       '@bnb-chain/reed-solomon':
         specifier: 1.1.3
         version: 1.1.3
@@ -264,11 +264,11 @@ importers:
   examples/uploadkit-with-remix-rainbowkit:
     dependencies:
       '@bnb-chain/greenfield-cosmos-types':
-        specifier: 0.4.0
-        version: 0.4.0
+        specifier: 0.4.0-alpha.31
+        version: 0.4.0-alpha.31
       '@bnb-chain/greenfield-js-sdk':
-        specifier: 1.2.0
-        version: 1.2.0
+        specifier: 2.0.0-alpha.6
+        version: 2.0.0-alpha.6
       '@bnb-chain/reed-solomon':
         specifier: 1.1.3
         version: 1.1.3
@@ -325,11 +325,11 @@ importers:
   examples/uploadkit-with-vite-walletkit:
     dependencies:
       '@bnb-chain/greenfield-cosmos-types':
-        specifier: 0.4.0
-        version: 0.4.0
+        specifier: 0.4.0-alpha.31
+        version: 0.4.0-alpha.31
       '@bnb-chain/greenfield-js-sdk':
-        specifier: 1.2.0
-        version: 1.2.0
+        specifier: 2.0.0-alpha.6
+        version: 2.0.0-alpha.6
       '@bnb-chain/reed-solomon':
         specifier: 1.1.3
         version: 1.1.3
@@ -390,11 +390,11 @@ importers:
         version: 9.1.2
     devDependencies:
       '@bnb-chain/greenfield-cosmos-types':
-        specifier: 0.4.0
-        version: 0.4.0
+        specifier: 0.4.0-alpha.31
+        version: 0.4.0-alpha.31
       '@bnb-chain/greenfield-js-sdk':
-        specifier: 1.2.0
-        version: 1.2.0
+        specifier: 2.0.0-alpha.6
+        version: 2.0.0-alpha.6
       '@bnb-chain/reed-solomon':
         specifier: 1.1.3
         version: 1.1.3
@@ -1779,23 +1779,16 @@ packages:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
 
-  /@bnb-chain/greenfield-cosmos-types@0.4.0:
-    resolution: {integrity: sha512-E6biyuWjVSzJ8F5lCRQsc6LsM7bJAAPZCjuUSmDZnGoQSfA+GrRXVJ+as+aVeePB4+XmP2pxMrSoh0ajzNRpPQ==}
+  /@bnb-chain/greenfield-cosmos-types@0.4.0-alpha.31:
+    resolution: {integrity: sha512-EPKQyQC/oe4/2p1Pn0FCECl7RyIvsXKs8bOmQHaylZweS6rZkXj5yov9oD1dVoHglV/tbQ/6EjdPg3wXUR+rww==}
     dependencies:
       long: 4.0.0
       protobufjs: 6.11.4
 
-  /@bnb-chain/greenfield-cosmos-types@0.4.0-alpha.30:
-    resolution: {integrity: sha512-nYThWPZHfq/bDMEu+Sw9cMMqgTk4NEg+PH9GkvN2OMgpo8QuCDy3Eh4C1g6lJy0BFv+ilethoPmKjSeEwa1m8g==}
+  /@bnb-chain/greenfield-js-sdk@2.0.0-alpha.6:
+    resolution: {integrity: sha512-tET1UIqqxGptyVBxKPVAbXUY40ul3nZwrcl+IeEziuMM2TdRosG4s5HCGZ792pv5ima50yDmo1Y6dOTa2WkD8Q==}
     dependencies:
-      long: 4.0.0
-      protobufjs: 6.11.4
-
-  /@bnb-chain/greenfield-js-sdk@1.2.0:
-    resolution: {integrity: sha512-xYYK+4WXGiqX7MBNqRij2zo/3HI3mMwtuUOQS3qOoWkHG6oWUAKeBPxUNKz6RuPigZYAckAH0XcrJT0kjJIB+g==}
-    dependencies:
-      '@bnb-chain/greenfield-cosmos-types': 0.4.0-alpha.30
-      '@bnb-chain/greenfield-zk-crypto': 1.0.0
+      '@bnb-chain/greenfield-cosmos-types': 0.4.0-alpha.31
       '@cosmjs/proto-signing': 0.32.2
       '@cosmjs/stargate': 0.32.2
       '@cosmjs/tendermint-rpc': 0.32.2
@@ -1805,7 +1798,8 @@ packages:
       '@ethersproject/strings': 5.7.0
       '@ethersproject/units': 5.7.0
       '@metamask/eth-sig-util': 5.1.0
-      cross-fetch: 3.1.8
+      '@noble/curves': 1.3.0
+      cross-fetch: 4.0.0
       dayjs: 1.11.10
       ethereum-cryptography: 2.1.2
       fast-xml-parser: 4.3.3
@@ -1822,9 +1816,6 @@ packages:
       - debug
       - encoding
       - utf-8-validate
-
-  /@bnb-chain/greenfield-zk-crypto@1.0.0:
-    resolution: {integrity: sha512-QlHNIleujENh02oPidtLFVNMArVpSQDdV9omOUTLjKA1j2/rrd4OKfMLh1gpeVKl53vw50ReGkbm2VlBXTZRbQ==}
 
   /@bnb-chain/reed-solomon@1.1.3:
     resolution: {integrity: sha512-DMLMPCjGPn2Mc6eFQ1boEqiq3iPgn+KuNl+ozY27b7bf+73YU1tHQ8jp+Dxq/wGv0hv8yfJaWXibiphtBY+B4w==}
@@ -6671,6 +6662,13 @@ packages:
 
   /cross-fetch@3.1.8:
     resolution: {integrity: sha512-cvA+JwZoU0Xq+h6WkMvAUqPEYy92Obet6UdKLfW60qn99ftItKjB5T+BkyWOFWe2pUyfQ+IJHmpOTznqk1M6Kg==}
+    dependencies:
+      node-fetch: 2.7.0
+    transitivePeerDependencies:
+      - encoding
+
+  /cross-fetch@4.0.0:
+    resolution: {integrity: sha512-e4a5N8lVvuLgAWgnCrLr2PP0YyDOTHa9H/Rj54dirp61qXnNq46m82bRhNqIA5VccJtWBvPTFRV3TtvHUKPB1g==}
     dependencies:
       node-fetch: 2.7.0
     transitivePeerDependencies:

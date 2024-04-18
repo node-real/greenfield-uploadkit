@@ -1,4 +1,4 @@
-import { VisibilityType } from '@bnb-chain/greenfield-cosmos-types/greenfield/storage/common';
+import { VisibilityType } from '@bnb-chain/greenfield-js-sdk';
 
 export type WaitStatus = 'CHECK' | 'WAIT' | 'ERROR';
 
@@ -39,10 +39,11 @@ export type UploadObject = {
   waitObject: WaitObject;
   checksum: string[];
   status: UploadStatus;
-  visibility: keyof typeof VisibilityType;
+  visibility: VisibilityType;
   createHash: string;
   msg: string;
   progress: number;
+  delegateUpload?: boolean;
 };
 
 export interface Sp {
@@ -74,7 +75,8 @@ export type Action =
       payload: {
         bucketName: string;
         spAddress: string;
-        visibility: keyof typeof VisibilityType;
+        visibility: VisibilityType;
+        delegateUpload?: boolean;
       };
     }
   | { type: 'RESET_UPLOAD_QUEUE' }

@@ -17,6 +17,7 @@ import {
 import { chains } from './chains';
 import { Box, useColorMode } from '@node-real/uikit';
 import { client } from './client';
+import { VisibilityType } from '@bnb-chain/greenfield-js-sdk';
 
 const config = createConfig(
   getDefaultConfig({
@@ -34,11 +35,12 @@ const options: WalletKitOptions = {
 
 const uploadOptions: UploadKitOptions = {
   client: client,
+  delegateUpload: true,
   sp: {
     operatorAddress: '0x89A1CC91B642DECbC4789474694C606E0E0c420b',
     endpoint: 'https://gnfd-testnet-sp1.bnbchain.org',
   },
-  visibility: 'VISIBILITY_TYPE_PUBLIC_READ',
+  visibility: VisibilityType.VISIBILITY_TYPE_PUBLIC_READ,
 };
 
 export default function App() {
