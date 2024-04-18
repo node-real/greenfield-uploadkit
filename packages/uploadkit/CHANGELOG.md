@@ -1,5 +1,11 @@
 # @node-real/greenfield-uploadkit
 
+## 0.1.0-alpha.0
+
+### Minor Changes
+
+- 7766d99: support delegateUpload feature
+
 ## 0.0.7
 
 ### Patch Changes
