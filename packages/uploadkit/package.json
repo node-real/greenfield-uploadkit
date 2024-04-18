@@ -1,6 +1,6 @@
 {
   "name": "@node-real/greenfield-uploadkit",
-  "version": "0.0.7",
+  "version": "0.1.0-alpha.0",
   "author": "node-real",
   "description": "Greenfield UploadKit is a React component library for easily uploading objects to BNB Greenfield.",
   "homepage": "https://node-real.github.io/greenfield-toolkit/packages/uploadkit",
