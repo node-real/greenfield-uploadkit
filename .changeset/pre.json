@@ -1,0 +1,17 @@
+{
+  "mode": "pre",
+  "tag": "alpha",
+  "initialVersions": {
+    "docs": "0.0.1",
+    "uploadkit-with-nextjs-rainbowkit": "0.1.0",
+    "uploadkit-with-nextjs-walletkit": "0.1.0",
+    "uploadkit-with-remix-rainbowkit": "0.0.75",
+    "uploadkit-with-vite-walletkit": "0.0.1",
+    "@node-real/greenfield-uploadkit": "0.0.5"
+  },
+  "changesets": [
+    "kind-crews-remember",
+    "short-pianos-allow",
+    "slimy-knives-hunt"
+  ]
+}
