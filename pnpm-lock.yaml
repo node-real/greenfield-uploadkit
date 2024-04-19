@@ -45,11 +45,11 @@ importers:
   docs:
     dependencies:
       '@bnb-chain/greenfield-cosmos-types':
-        specifier: 0.4.0-alpha.31
-        version: 0.4.0-alpha.31
+        specifier: 0.4.0-alpha.32
+        version: 0.4.0-alpha.32
       '@bnb-chain/greenfield-js-sdk':
-        specifier: 2.0.0-alpha.6
-        version: 2.0.0-alpha.6
+        specifier: 2.0.0-alpha.7
+        version: 2.0.0-alpha.7
       '@bnb-chain/reed-solomon':
         specifier: ^1.1.3
         version: 1.1.3
@@ -148,11 +148,11 @@ importers:
   examples/uploadkit-with-nextjs-rainbowkit:
     dependencies:
       '@bnb-chain/greenfield-cosmos-types':
-        specifier: 0.4.0-alpha.31
-        version: 0.4.0-alpha.31
+        specifier: 0.4.0-alpha.32
+        version: 0.4.0-alpha.32
       '@bnb-chain/greenfield-js-sdk':
-        specifier: 2.0.0-alpha.6
-        version: 2.0.0-alpha.6
+        specifier: 2.0.0-alpha.7
+        version: 2.0.0-alpha.7
       '@bnb-chain/reed-solomon':
         specifier: 1.1.3
         version: 1.1.3
@@ -206,11 +206,11 @@ importers:
   examples/uploadkit-with-nextjs-walletkit:
     dependencies:
       '@bnb-chain/greenfield-cosmos-types':
-        specifier: 0.4.0-alpha.31
-        version: 0.4.0-alpha.31
+        specifier: 0.4.0-alpha.32
+        version: 0.4.0-alpha.32
       '@bnb-chain/greenfield-js-sdk':
-        specifier: 2.0.0-alpha.6
-        version: 2.0.0-alpha.6
+        specifier: 2.0.0-alpha.7
+        version: 2.0.0-alpha.7
       '@bnb-chain/reed-solomon':
         specifier: 1.1.3
         version: 1.1.3
@@ -264,11 +264,11 @@ importers:
   examples/uploadkit-with-remix-rainbowkit:
     dependencies:
       '@bnb-chain/greenfield-cosmos-types':
-        specifier: 0.4.0-alpha.31
-        version: 0.4.0-alpha.31
+        specifier: 0.4.0-alpha.32
+        version: 0.4.0-alpha.32
       '@bnb-chain/greenfield-js-sdk':
-        specifier: 2.0.0-alpha.6
-        version: 2.0.0-alpha.6
+        specifier: 2.0.0-alpha.7
+        version: 2.0.0-alpha.7
       '@bnb-chain/reed-solomon':
         specifier: 1.1.3
         version: 1.1.3
@@ -325,11 +325,11 @@ importers:
   examples/uploadkit-with-vite-walletkit:
     dependencies:
       '@bnb-chain/greenfield-cosmos-types':
-        specifier: 0.4.0-alpha.31
-        version: 0.4.0-alpha.31
+        specifier: 0.4.0-alpha.32
+        version: 0.4.0-alpha.32
       '@bnb-chain/greenfield-js-sdk':
-        specifier: 2.0.0-alpha.6
-        version: 2.0.0-alpha.6
+        specifier: 2.0.0-alpha.7
+        version: 2.0.0-alpha.7
       '@bnb-chain/reed-solomon':
         specifier: 1.1.3
         version: 1.1.3
@@ -390,11 +390,11 @@ importers:
         version: 9.1.2
     devDependencies:
       '@bnb-chain/greenfield-cosmos-types':
-        specifier: 0.4.0-alpha.31
-        version: 0.4.0-alpha.31
+        specifier: 0.4.0-alpha.32
+        version: 0.4.0-alpha.32
       '@bnb-chain/greenfield-js-sdk':
-        specifier: 2.0.0-alpha.6
-        version: 2.0.0-alpha.6
+        specifier: 2.0.0-alpha.7
+        version: 2.0.0-alpha.7
       '@bnb-chain/reed-solomon':
         specifier: 1.1.3
         version: 1.1.3
@@ -1779,16 +1779,16 @@ packages:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
 
-  /@bnb-chain/greenfield-cosmos-types@0.4.0-alpha.31:
-    resolution: {integrity: sha512-EPKQyQC/oe4/2p1Pn0FCECl7RyIvsXKs8bOmQHaylZweS6rZkXj5yov9oD1dVoHglV/tbQ/6EjdPg3wXUR+rww==}
+  /@bnb-chain/greenfield-cosmos-types@0.4.0-alpha.32:
+    resolution: {integrity: sha512-7hrp+NpkNkbrz4BOB1hyJPUcUjTbNDJQZBqIEC4JO03i5TOMXvQtaFLXI8zQUmg7u3043D8knddq+dtwL9C8EA==}
     dependencies:
       long: 4.0.0
       protobufjs: 6.11.4
 
-  /@bnb-chain/greenfield-js-sdk@2.0.0-alpha.6:
-    resolution: {integrity: sha512-tET1UIqqxGptyVBxKPVAbXUY40ul3nZwrcl+IeEziuMM2TdRosG4s5HCGZ792pv5ima50yDmo1Y6dOTa2WkD8Q==}
+  /@bnb-chain/greenfield-js-sdk@2.0.0-alpha.7:
+    resolution: {integrity: sha512-/AJt4OvX0eH3VU7AOKmMaByhkX6PEBY+nve2LpNM/Mku9IlmF/WCSdaWiImG2EV27Mv/CKgopFKFqmmf/bUEPw==}
     dependencies:
-      '@bnb-chain/greenfield-cosmos-types': 0.4.0-alpha.31
+      '@bnb-chain/greenfield-cosmos-types': 0.4.0-alpha.32
       '@cosmjs/proto-signing': 0.32.2
       '@cosmjs/stargate': 0.32.2
       '@cosmjs/tendermint-rpc': 0.32.2
