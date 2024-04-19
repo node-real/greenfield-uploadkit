@@ -1,5 +1,11 @@
 # @node-real/greenfield-uploadkit
 
+## 0.1.0-alpha.1
+
+### Patch Changes
+
+- a50135e: fix object sealling issue
+
 ## 0.1.0-alpha.0
 
 ### Minor Changes
