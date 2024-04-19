@@ -25,12 +25,12 @@ The following examples are provided in the [examples](../../examples/) folder of
 ## Installation
 
 ```bash
-npm i wagmi@1 viem@1 @node-real/greenfield-uploadkit @bnb-chain/greenfield-js-sdk@2.0.0-alpha.6 @bnb-chain/greenfield-cosmos-types@0.4.0-alpha.31 @bnb-chain/reed-solomon
+npm i wagmi@1 viem@1 @node-real/greenfield-uploadkit @bnb-chain/greenfield-js-sdk@2.0.0-alpha.7 @bnb-chain/greenfield-cosmos-types@0.4.0-alpha.32 @bnb-chain/reed-solomon
 ```
 - wagmi >= 1.0.0
 - viem >= 1.0.0
-- @bnb-chain/greenfield-js-sdk = 2.0.0-alpha.6
-- @bnb-chain/greenfield-cosmos-types = 0.4.0-alpha.31
+- @bnb-chain/greenfield-js-sdk = 2.0.0-alpha.7
+- @bnb-chain/greenfield-cosmos-types = 0.4.0-alpha.32
 - @bnb-chain/reed-solomon >= 1.1.3
 
 ## Usage
